@@ -14,7 +14,7 @@ import shutil
 
 #Api_key = os.environ.get("pcsk_2J7EVG_627jkBdNjsMmk9HQrSgrDLet68txQzv3R4dvy4kWePXSQ3tLcWL2emAg2f9iKjf")
 #Environment = os.environ.get("us-east-1")
-pc = Pinecone(api_key="pcsk_2J7EVG_627jkBdNjsMmk9HQrSgrDLet68txQzv3R4dvy4kWePXSQ3tLcWL2emAg2f9iKjf", environment="us-east-1")
+pc = Pinecone(api_key="your_api_rey", environment="region")
 
 DB_PATH = "face_database"
 FACES_ADDED_PATH = "faces_added"
@@ -30,7 +30,7 @@ recognizer = cv2.face.LBPHFaceRecognizer_create()
 
 def insert_into_db(embedding_dict):
 
-    index_name = "frs"
+    index_name = "your_index_name"
     if not pc.has_index(index_name):
         pc.create_index_for_model(
             name=index_name,
@@ -68,10 +68,10 @@ def preprocess_image(img_path, target_size=(112, 112)):
                        [-1, 5,-1],
                        [0, -1, 0]])
     
-    #sharpened = cv2.filter2D(equalized, -1, kernel)
+    sharpened = cv2.filter2D(equalized, -1, kernel)
 
     # Resize to target size
-    #resized = cv2.resize(sharpened, (112,112))
+    resized = cv2.resize(sharpened, (112,112))
 
     gamma = 1.2
     inv_gamma = 1.0 / gamma
@@ -79,7 +79,7 @@ def preprocess_image(img_path, target_size=(112, 112)):
     gamma_corrected = cv2.LUT(equalized, table)
 
     # Convert back to 3-channel RGB (DeepFace expects color)
-    #final_img = cv2.cvtColor(resized, cv2.COLOR_GRAY2RGB)
+    final_img = cv2.cvtColor(resized, cv2.COLOR_GRAY2RGB)
     final_img = cv2.cvtColor(gamma_corrected, cv2.COLOR_GRAY2RGB)
 
     return final_img
