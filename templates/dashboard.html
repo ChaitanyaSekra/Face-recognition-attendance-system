@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Live Dashboard - Who’s IN</title>
+  <style>
+    :root {
+      --bg: #121212;
+      --primary: #8a2be2;
+      --secondary: #1e1e2f;
+      --text: #ffffff;
+      --accent: #ff4081;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 2rem;
+    }
+
+    h1 {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-size: 2.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--secondary);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: left;
+    }
+
+    th {
+      background-color: var(--primary);
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background-color: #1a1a2e;
+    }
+
+    tr:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    td {
+      color: #ccc;
+      font-size: 1rem;
+    }
+
+    .btn-container {
+      text-align: center;
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background-color: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #e91e63;
+    }
+
+    @media (max-width: 600px) {
+      th, td {
+        padding: 0.75rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Currently Inside</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Person</th>
+        <th>Last IN Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for person in people %}
+        <tr>
+          <td>{{ person.name }}</td>
+          <td>{{ person.time }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="btn-container">
+    <a href="/" class="btn">← Back</a>
+    <button class="btn" onclick="location.reload()">🔄 Refresh</button>
+  </div>
+</body>
+</html>
