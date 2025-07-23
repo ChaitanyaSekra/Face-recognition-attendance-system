@@ -10,7 +10,7 @@ from deepface import DeepFace
 from pinecone import Pinecone
 
 
-pc = Pinecone(api_key="pcsk_2J7EVG_627jkBdNjsMmk9HQrSgrDLet68txQzv3R4dvy4kWePXSQ3tLcWL2emAg2f9iKjf", environment="us-east-1")
+pc = Pinecone(api_key="your_api_key", environment="region")
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 
 def insert_into_db(record):
